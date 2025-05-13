@@ -1,6 +1,10 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  background:  #81AE64;
+  background: linear-gradient(90deg,rgba(129, 174, 100, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+  max-width: unset;
+  padding: 0;
 }
 
 .columns img {
@@ -8,7 +12,9 @@
 }
 
 .columns > div > div {
+  padding-left: 24px;
   order: 1;
+
 }
 
 .columns > div > .columns-img-col {
