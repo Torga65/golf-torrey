@@ -32,8 +32,13 @@
     gap: 24px;
   }
 
+  .columns img {
+    margin: auto;
+    width: 50%;
+  }
   .columns > div > div {
     flex: 1;
     order: unset;
+    padding-left: 50px;
   }
 }

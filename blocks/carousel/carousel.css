@@ -140,6 +140,17 @@
   left: calc(50% - 2px);
 }
 
+.default-content-wrapper h3{
+  text-align: center;
+  color: black;
+}
+
+.default-content-wrapper p{
+  text-align: center;
+  color: #10a970;
+}
+ 
+
 @media (width >= 600px) {
   .carousel .carousel-navigation-buttons {
     left: 24px;

@@ -1,5 +1,3 @@
-//Scroll-animation.js
-
 import { createOptimizedPicture } from '../../scripts/scripts.js';
 
 class ScrollAnimation {
