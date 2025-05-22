@@ -3,7 +3,7 @@ Your project's description...
 
 ## Environments
 - Preview: https://main--golf-torrey--torga65.aem.page/
-- Live: https:/golf-torrey--torga65.aem.live/
+- Live: https://golf-torrey--torga65.aem.live/
 
 ## Documentation
 
