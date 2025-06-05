@@ -8,13 +8,18 @@
 }
 
 .columns img {
+  display: block;
   width: 100%;
 }
 
 .columns > div > div {
   padding-left: 24px;
   order: 1;
+}
 
+.columns > div > div h1 {
+  font-size: 50px;
+  color: #fff;
 }
 
 .columns > div > .columns-img-col {
@@ -32,11 +37,19 @@
     gap: 24px;
   }
 
+  .columns > div > div h1 {
+    text-align: right;
+    padding-bottom: 150px;
+
+  }
   .columns img {
+    display: flex;
     margin: auto;
-    width: 50%;
+
+
   }
   .columns > div > div {
+    max-width: fit-content;
     flex: 1;
     order: unset;
     padding-left: 50px;

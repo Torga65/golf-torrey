@@ -1,7 +1,7 @@
 .cards > ul {
   list-style: none;
   margin: auto;
-  width: 50%;
+  width: 70%;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
