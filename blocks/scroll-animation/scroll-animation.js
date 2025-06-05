@@ -2,6 +2,7 @@ import { createOptimizedPicture } from '../../scripts/scripts.js';
 
 class ScrollAnimation {
   constructor(block) {
+    this.block = block;
     this.itemsCount = block.children.length;
   }
 
@@ -13,17 +14,27 @@ class ScrollAnimation {
     const scrollHandler = () => {
       const rect = this.block.getBoundingClientRect();
       const slideIndex = Math.ceil(
-        Math.max(0, Math.min(this.itemsCount, (this.itemsCount * -1 * rect.top) / rect.height)),
+        Math.max(
+          0,
+          Math.min(
+            this.itemsCount - 1,
+            (this.itemsCount * -1 * rect.top) / rect.height
+          )
+        )
       );
+
       if (lastSlideIndex !== slideIndex) {
         this.block.dataset.currentIndex = slideIndex;
         slides.forEach((slide) => {
           const index = Number(slide.dataset.index);
           if (index < slideIndex) slide.dataset.status = 'behind';
-          if (index === slideIndex) slide.dataset.status = 'active';
-          if (index > slideIndex) slide.dataset.status = 'hidden';
+          else if (index === slideIndex) slide.dataset.status = 'active';
+          else slide.dataset.status = 'hidden';
         });
         lastSlideIndex = slideIndex;
+
+        // Uncomment for debugging
+        // console.log(`Active index: ${slideIndex}`);
       }
     };
 
@@ -37,15 +48,24 @@ class ScrollAnimation {
       if (!target) return;
       const index = Number(target.closest('[data-index]').dataset.index);
       if (Number.isNaN(index)) return;
+
       const rect = this.block.getBoundingClientRect();
-      const offset = rect.top + (index - 1) * (rect.height / this.itemsCount) + document.documentElement.scrollTop + 1;
-      window.scrollTo({ top: offset, behavior: 'instant' });
+      const offset = rect.top +
+        (index - 1) * (rect.height / this.itemsCount) +
+        document.documentElement.scrollTop + 1;
+
+      window.scrollTo({ top: offset, behavior: 'smooth' }); // smoother experience
     });
   }
 
   render() {
     const container = document.createElement('div');
     container.className = 'scroll-animation-window';
+
+    // Fallback: Set animation item height if not set via CSS
+    if (!this.block.style.getPropertyValue('--scroll-animation-height')) {
+      this.block.style.setProperty('--scroll-animation-height', '100vh');
+    }
     this.block.style.setProperty('--scroll-animation-items', this.itemsCount);
 
     [...this.block.children].forEach((row, rowIndex) => {
@@ -53,7 +73,7 @@ class ScrollAnimation {
         cell.dataset.index = rowIndex;
         if (colIndex === 0) cell.className = 'scroll-animation-image';
         if (colIndex === 1) cell.className = 'scroll-animation-body';
-        if (colIndex === 1)
+        if (colIndex === 1) {
           [...cell.children].forEach((element) => {
             if (element.matches('h1,h2,h3,h4,h5,h6')) {
               element.className = 'scroll-animation-heading';
@@ -61,6 +81,7 @@ class ScrollAnimation {
               element.className = 'scroll-animation-text';
             }
           });
+        }
         container.append(cell);
       });
     });
@@ -69,14 +90,15 @@ class ScrollAnimation {
     scrollIcon.className = 'scroll-animation-scroll-icon';
     container.append(scrollIcon);
 
-    container
-      .querySelectorAll('img')
-      .forEach((img) =>
-        img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])),
-      );
-    this.block.textContent = '';
+    container.querySelectorAll('img').forEach((img) =>
+      img.closest('picture').replaceWith(
+        createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])
+      )
+    );
 
+    this.block.textContent = '';
     this.block.append(container);
+
     this.trackScroll();
     this.addClickHandlers();
   }
