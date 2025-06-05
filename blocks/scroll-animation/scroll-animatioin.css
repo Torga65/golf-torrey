@@ -4,6 +4,10 @@
   100% { transform: scale(1)}
 }
 
+:root {
+  --scroll-animation-height: 100vh;
+}
+
 .main .scroll-animation {
   display: block;
   height: calc(var(--scroll-animation-height) * var(--scroll-animation-items, 1));
