@@ -31,9 +31,8 @@
     line-height: 30px;
 }
 
-.sub-headline picture img {
-  width: auto;
-  height: auto;
+main img {
+padding-left: 100px
 }
 
 .text-cta-container .buttons-container p {
@@ -75,7 +74,6 @@ h1 {
   font-weight: 800;
   letter-spacing: -1.15px;
   margin: 0 0 1rem;
-  max-width: 700px;
 }
 
 h2 {
