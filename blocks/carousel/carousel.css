@@ -140,14 +140,14 @@
   left: calc(50% - 2px);
 }
 
-.default-content-wrapper h3{
+.default-content-wrapper h1,h2,h3,h4 {
   text-align: center;
   color: black;
 }
 
-.default-content-wrapper p{
+ .default-content-wrapper p{
   text-align: center;
-  color: #10a970;
+  color: black;
 }
  
 

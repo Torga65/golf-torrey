@@ -33,8 +33,7 @@
 
 .main .scroll-animation .scroll-animation-image {
   display: grid;
-  justify-items: center;
-  align-items: center;
+  place-items: center center;
   z-index: 1;
   grid-area: 1 / 1;
   opacity: 0;
@@ -114,7 +113,7 @@
   text-align: center;
 }
 
-@media (min-width: 561px) {
+@media (width >= 561px) {
   .main .scroll-animation .scroll-animation-window{
     max-width: none;
     margin: unset;
@@ -143,16 +142,13 @@
   .main .scroll-animation .scroll-animation-body[data-index="1"] .scroll-animation-text,
   .main .scroll-animation .scroll-animation-body[data-index="2"] .scroll-animation-text,
   .main .scroll-animation .scroll-animation-body[data-index="3"] .scroll-animation-text {
-    bottom: auto;
-    left: 57%;
-    top: 40%;
-    right: 0;
+    inset: 40% 0 auto 57%;
     text-align: left;
   }
 }
 
 /* tablet break point */
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .main .scroll-animation .scroll-animation-window{
     max-width: none;
     margin: unset;
@@ -178,10 +174,7 @@
   }
   
   .main .scroll-animation .scroll-animation-body[data-index="1"] .scroll-animation-text {
-    bottom: auto;
-    right: auto;
-    top: 52%;
-    left: 6%;
+    inset: 52% auto auto 6%;
     width: 140px;
   }
   
@@ -210,7 +203,7 @@
 }
 
 /* laptop break point */
-@media (min-width: 992px) {
+@media (width >= 992px) {
   .main .scroll-animation .scroll-animation-image {
     max-width: unset;
   }
@@ -254,7 +247,7 @@
 }
 
 /* hd break point */
-@media (min-width: 1366px) {
+@media (width >= 1366px) {
   .main .scroll-animation .scroll-animation-body[data-index="1"] .scroll-animation-heading {
     top: 69%;
     left: 22%;

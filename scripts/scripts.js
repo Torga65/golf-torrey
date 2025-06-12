@@ -13,7 +13,6 @@ import {
   loadSection,
   loadSections,
   loadCSS,
-  createOptimizedPicture,
 } from './aem.js';
 
 /**
@@ -48,9 +47,6 @@ function decorateSectionBackgrounds(main) {
     const { background } = section.dataset;
     // if background is a picture, create an optimized picture
     if (background.includes('media_')) { // if background is an embedded image
-      const backgroundPicture = createOptimizedPicture(background);
-      backgroundPicture.classList.add('section-background-image');
-      section.prepend(backgroundPicture);
     } else if (background.startsWith('#')) { // if background is a hex color
       section.style.backgroundColor = background;
     } else if (background.includes('deg')) { // if background is a gradient
@@ -68,6 +64,45 @@ function autolinkModals(doc) {
       openModal(origin.href);
     }
   });
+}
+
+export function createOptimizedPicture(
+  src,
+  alt = '',
+  eager = false,
+  breakpoints = [{ media: '(min-width: 600px)', width: '2000' }, { width: '750' }],
+) {
+  const url = new URL(src, window.location.href);
+  const picture = document.createElement('picture');
+  const { pathname } = url;
+  const ext = pathname.substring(pathname.lastIndexOf('.') + 1);
+
+  // webp
+  breakpoints.forEach((br) => {
+    const source = document.createElement('source');
+    if (br.media) source.setAttribute('media', br.media);
+    source.setAttribute('type', 'image/webp');
+    source.setAttribute('srcset', `${pathname}?width=${br.width}&format=webply&optimize=low`);
+    picture.appendChild(source);
+  });
+
+  // fallback
+  breakpoints.forEach((br, i) => {
+    if (i < breakpoints.length - 1) {
+      const source = document.createElement('source');
+      if (br.media) source.setAttribute('media', br.media);
+      source.setAttribute('srcset', `${pathname}?width=${br.width}&format=${ext}&optimize=low`);
+      picture.appendChild(source);
+    } else {
+      const img = document.createElement('img');
+      img.setAttribute('loading', eager ? 'eager' : 'lazy');
+      img.setAttribute('alt', alt);
+      picture.appendChild(img);
+      img.setAttribute('src', `${pathname}?width=${br.width}&format=${ext}&optimize=low`);
+    }
+  });
+
+  return picture;
 }
 
 /**

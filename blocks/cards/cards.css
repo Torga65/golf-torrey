@@ -7,11 +7,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
   grid-gap: 60px;
+} 
+
+.cards-container h2 {
+  text-align: center;
 }
 
 .cards > ul > li {
   border: 1px solid #dadada;
-  background-color: var(--background-color);
+
 }
 
 .cards .cards-card-body {
@@ -20,12 +24,6 @@
 
 .cards .cards-card-image {
   line-height: 0;
-}
-
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
 }
 
 .spinning-background {
@@ -40,8 +38,14 @@
 }
 
 .spinning-background img {
-  width: 100%;
-  height: 100%;
+  width: 150%;
+  height: 150%;
   object-fit: contain;
   transform-origin: center center;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }

@@ -38,7 +38,10 @@ class ScrollAnimation {
       const index = Number(target.closest('[data-index]').dataset.index);
       if (Number.isNaN(index)) return;
       const rect = this.block.getBoundingClientRect();
-      const offset = rect.top + (index - 1) * (rect.height / this.itemsCount) + document.documentElement.scrollTop + 1;
+      const offset = rect.top
+        + (index - 1) * (rect.height / this.itemsCount)
+        + document.documentElement.scrollTop
+        + 1;
       window.scrollTo({ top: offset, behavior: 'instant' });
     });
   }
@@ -53,7 +56,7 @@ class ScrollAnimation {
         cell.dataset.index = rowIndex;
         if (colIndex === 0) cell.className = 'scroll-animation-image';
         if (colIndex === 1) cell.className = 'scroll-animation-body';
-        if (colIndex === 1)
+        if (colIndex === 1) {
           [...cell.children].forEach((element) => {
             if (element.matches('h1,h2,h3,h4,h5,h6')) {
               element.className = 'scroll-animation-heading';
@@ -61,6 +64,7 @@ class ScrollAnimation {
               element.className = 'scroll-animation-text';
             }
           });
+        }
         container.append(cell);
       });
     });
@@ -71,9 +75,7 @@ class ScrollAnimation {
 
     container
       .querySelectorAll('img')
-      .forEach((img) =>
-        img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])),
-      );
+      .forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
     this.block.textContent = '';
 
     this.block.append(container);
