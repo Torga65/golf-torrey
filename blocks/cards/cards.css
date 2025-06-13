@@ -42,6 +42,7 @@
   height: 150%;
   object-fit: contain;
   transform-origin: center center;
+  opacity: 0.6;
 }
 
 .cards > ul > li img {
